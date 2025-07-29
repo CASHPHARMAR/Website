@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - ModernStore</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i> ModernStore
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search products..." class="form-control" style="width: 200px;">
+                        <div id="search-results" class="search-results d-none"></div>
+                    </div>
+                    
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    
+                    <div class="user-menu">
+                        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="section" style="padding: 1rem 0; background: var(--light-color);">
+        <div class="container">
+            <nav style="font-size: 0.9rem;">
+                <a href="index.html" style="color: var(--text-light); text-decoration: none;">Home</a>
+                <span style="margin: 0 0.5rem; color: var(--text-light);">/</span>
+                <span>Products</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section">
+        <div class="container">
+            <div class="d-flex justify-between align-center mb-4">
+                <div>
+                    <h1>All Products</h1>
+                    <p id="results-info">Loading products...</p>
+                </div>
+                
+                <div class="d-flex gap-2 align-center">
+                    <label for="sort-select" style="margin-right: 0.5rem;">Sort by:</label>
+                    <select id="sort-select" class="form-control" style="width: auto;">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name A-Z</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="grid grid-4" style="gap: 2rem;">
+                <!-- Filters Sidebar -->
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Filters</h4>
+                            
+                            <!-- Categories Filter -->
+                            <div class="mb-4">
+                                <h6 class="mb-2">Categories</h6>
+                                <div id="category-filters">
+                                    <!-- Categories will be loaded here -->
+                                </div>
+                            </div>
+                            
+                            <!-- Price Range Filter -->
+                            <div class="mb-4">
+                                <h6 class="mb-2">Price Range</h6>
+                                <div class="d-flex gap-2 mb-2">
+                                    <input type="number" id="min-price" placeholder="Min" class="form-control" style="width: 80px;">
+                                    <input type="number" id="max-price" placeholder="Max" class="form-control" style="width: 80px;">
+                                </div>
+                                <input type="range" id="price-range" min="0" max="1000" value="1000" class="w-full">
+                                <div class="d-flex justify-between mt-1" style="font-size: 0.8rem; color: var(--text-light);">
+                                    <span>$0</span>
+                                    <span>$1000+</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Rating Filter -->
+                            <div class="mb-4">
+                                <h6 class="mb-2">Rating</h6>
+                                <div class="rating-filters">
+                                    <label class="d-flex align-center gap-2 mb-1">
+                                        <input type="checkbox" value="4" class="rating-filter">
+                                        <span>⭐⭐⭐⭐+ (4+ stars)</span>
+                                    </label>
+                                    <label class="d-flex align-center gap-2 mb-1">
+                                        <input type="checkbox" value="3" class="rating-filter">
+                                        <span>⭐⭐⭐+ (3+ stars)</span>
+                                    </label>
+                                    <label class="d-flex align-center gap-2 mb-1">
+                                        <input type="checkbox" value="2" class="rating-filter">
+                                        <span>⭐⭐+ (2+ stars)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Clear Filters -->
+                            <button class="btn btn-outline w-full" onclick="clearFilters()">
+                                Clear All Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Products Grid -->
+                <div style="grid-column: span 3;">
+                    <div id="products-grid" class="grid grid-3">
+                        <!-- Products will be loaded here -->
+                    </div>
+                    
+                    <!-- Loading -->
+                    <div id="loading" class="text-center p-5">
+                        <div class="loading" style="width: 40px; height: 40px;"></div>
+                        <p class="mt-2">Loading products...</p>
+                    </div>
+                    
+                    <!-- No Results -->
+                    <div id="no-results" class="text-center p-5 d-none">
+                        <i class="fas fa-search" style="font-size: 4rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your filters or search terms.</p>
+                    </div>
+                    
+                    <!-- Load More -->
+                    <div class="text-center mt-4">
+                        <button id="load-more" class="btn btn-outline d-none" onclick="loadMoreProducts()">
+                            Load More Products
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--dark-color); color: white; padding: 3rem 0 1rem;">
+        <div class="container">
+            <div class="grid grid-4 mb-4">
+                <div>
+                    <h4 class="mb-3">ModernStore</h4>
+                    <p>Your premier destination for quality products at unbeatable prices.</p>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><a href="index.html" style="color: #ccc; text-decoration: none;">Home</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Best Sellers</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Sale Items</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Customer Service</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">FAQ</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Contact Info</h5>
+                    <p style="color: #ccc;"><i class="fas fa-envelope"></i> info@modernstore.com</p>
+                    <p style="color: #ccc;"><i class="fas fa-phone"></i> (555) 123-4567</p>
+                </div>
+            </div>
+            
+            <hr style="border-color: #555;">
+            <div class="text-center mt-3">
+                <p style="color: #ccc; margin: 0;">&copy; 2024 ModernStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        let currentPage = 0;
+        let hasMore = true;
+        let currentFilters = {};
+        let isLoading = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategories();
+            loadProducts();
+            
+            // Event listeners for filters
+            document.getElementById('sort-select').addEventListener('change', () => {
+                currentPage = 0;
+                loadProducts(true);
+            });
+            
+            document.getElementById('min-price').addEventListener('input', debounce(applyPriceFilter, 500));
+            document.getElementById('max-price').addEventListener('input', debounce(applyPriceFilter, 500));
+            document.getElementById('price-range').addEventListener('input', debounce(applyRangeFilter, 300));
+            
+            // Get category from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryId = urlParams.get('category');
+            if (categoryId) {
+                currentFilters.category = categoryId;
+            }
+        });
+
+        async function loadCategories() {
+            try {
+                const response = await fetch('php/get-categories.php');
+                const categories = await response.json();
+                
+                const categoryFilters = document.getElementById('category-filters');
+                categoryFilters.innerHTML = categories.map(category => `
+                    <label class="d-flex align-center gap-2 mb-1">
+                        <input type="checkbox" value="${category.id}" class="category-filter" 
+                               ${currentFilters.category == category.id ? 'checked' : ''}>
+                        <span>${category.name}</span>
+                    </label>
+                `).join('');
+                
+                // Add event listeners to category filters
+                document.querySelectorAll('.category-filter').forEach(filter => {
+                    filter.addEventListener('change', applyCategoryFilter);
+                });
+                
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        async function loadProducts(reset = false) {
+            if (isLoading) return;
+            
+            isLoading = true;
+            
+            if (reset) {
+                currentPage = 0;
+                document.getElementById('products-grid').innerHTML = '';
+            }
+            
+            document.getElementById('loading').classList.remove('d-none');
+            document.getElementById('no-results').classList.add('d-none');
+            
+            try {
+                const params = new URLSearchParams({
+                    offset: currentPage * 12,
+                    limit: 12,
+                    ...currentFilters
+                });
+                
+                if (document.getElementById('sort-select').value) {
+                    params.append('sort', document.getElementById('sort-select').value);
+                }
+                
+                const response = await fetch(`php/get-products.php?${params}`);
+                const data = await response.json();
+                
+                displayProducts(data.products, reset);
+                updateResultsInfo(data.total, data.offset, data.products.length);
+                
+                hasMore = data.has_more;
+                document.getElementById('load-more').classList.toggle('d-none', !hasMore);
+                
+                if (data.products.length === 0 && currentPage === 0) {
+                    document.getElementById('no-results').classList.remove('d-none');
+                }
+                
+            } catch (error) {
+                console.error('Error loading products:', error);
+                app.showNotification('Error loading products', 'error');
+            } finally {
+                document.getElementById('loading').classList.add('d-none');
+                isLoading = false;
+            }
+        }
+
+        function displayProducts(products, reset = false) {
+            const grid = document.getElementById('products-grid');
+            
+            const productsHTML = products.map(product => {
+                const features = JSON.parse(product.features || '[]');
+                const currentPrice = product.sale_price || product.price;
+                
+                return `
+                    <div class="card product-card" data-category="${product.category_id}" data-price="${currentPrice}">
+                        ${product.sale_price ? '<div class="product-badge">Sale</div>' : ''}
+                        
+                        <div class="product-actions">
+                            <button class="product-action quick-view" data-product-id="${product.id}" title="Quick View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="product-action wishlist-btn" 
+                                    data-product-id="${product.id}"
+                                    data-product-name="${product.name}"
+                                    data-product-price="${currentPrice}"
+                                    data-product-image="${product.image}"
+                                    title="Add to Wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                        
+                        <img src="uploads/${product.image}" alt="${product.name}" class="card-img">
+                        
+                        <div class="card-body">
+                            <h4 class="card-title">${product.name}</h4>
+                            <p class="card-text">${product.description.substring(0, 100)}...</p>
+                            
+                            <div class="d-flex justify-between align-center mb-3">
+                                <div class="price">
+                                    ${product.sale_price ? 
+                                        `<span class="price-old">$${product.price}</span>$${product.sale_price}` : 
+                                        `$${product.price}`
+                                    }
+                                </div>
+                                <div class="rating">
+                                    ${generateStars(product.avg_rating || 0)}
+                                    <small>(${product.review_count || 0})</small>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary w-full add-to-cart"
+                                    data-product-id="${product.id}"
+                                    data-product-name="${product.name}"
+                                    data-product-price="${currentPrice}"
+                                    data-product-image="${product.image}">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            if (reset) {
+                grid.innerHTML = productsHTML;
+            } else {
+                grid.insertAdjacentHTML('beforeend', productsHTML);
+            }
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            
+            return '★'.repeat(fullStars) + 
+                   (halfStar ? '☆' : '') + 
+                   '☆'.repeat(emptyStars);
+        }
+
+        function updateResultsInfo(total, offset, currentCount) {
+            const start = offset + 1;
+            const end = offset + currentCount;
+            document.getElementById('results-info').textContent = 
+                `Showing ${start}-${end} of ${total} products`;
+        }
+
+        function applyCategoryFilter() {
+            const selectedCategories = Array.from(document.querySelectorAll('.category-filter:checked'))
+                .map(filter => filter.value);
+            
+            if (selectedCategories.length > 0) {
+                currentFilters.category = selectedCategories.join(',');
+            } else {
+                delete currentFilters.category;
+            }
+            
+            currentPage = 0;
+            loadProducts(true);
+        }
+
+        function applyPriceFilter() {
+            const minPrice = document.getElementById('min-price').value;
+            const maxPrice = document.getElementById('max-price').value;
+            
+            if (minPrice) currentFilters.min_price = minPrice;
+            else delete currentFilters.min_price;
+            
+            if (maxPrice) currentFilters.max_price = maxPrice;
+            else delete currentFilters.max_price;
+            
+            currentPage = 0;
+            loadProducts(true);
+        }
+
+        function applyRangeFilter() {
+            const maxPrice = document.getElementById('price-range').value;
+            currentFilters.max_price = maxPrice;
+            document.getElementById('max-price').value = maxPrice;
+            
+            currentPage = 0;
+            loadProducts(true);
+        }
+
+        function clearFilters() {
+            currentFilters = {};
+            currentPage = 0;
+            
+            // Clear form elements
+            document.querySelectorAll('.category-filter, .rating-filter').forEach(filter => {
+                filter.checked = false;
+            });
+            
+            document.getElementById('min-price').value = '';
+            document.getElementById('max-price').value = '';
+            document.getElementById('price-range').value = 1000;
+            document.getElementById('sort-select').value = 'newest';
+            
+            loadProducts(true);
+        }
+
+        function loadMoreProducts() {
+            currentPage++;
+            loadProducts();
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>

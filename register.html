@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - ModernStore</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i> ModernStore
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Registration Section -->
+    <section class="section" style="min-height: 80vh; padding: 2rem 0;">
+        <div class="container">
+            <div class="grid grid-2 align-center">
+                <!-- Left Side - Benefits -->
+                <div class="text-center">
+                    <h1>Join ModernStore</h1>
+                    <p class="mb-4">Create your account and start enjoying exclusive benefits!</p>
+                    
+                    <div class="card" style="max-width: 400px; margin: 0 auto;">
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <i class="fas fa-gifts" style="font-size: 3rem; color: var(--primary-color);"></i>
+                                <h4 class="mt-2">Member Benefits</h4>
+                            </div>
+                            
+                            <ul style="text-align: left; padding-left: 1rem;">
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--success-color);"></i> Exclusive member discounts</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--success-color);"></i> Free shipping on orders $50+</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--success-color);"></i> Early access to new products</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--success-color);"></i> Order tracking and history</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--success-color);"></i> Wishlist and saved items</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Registration Form -->
+                <div>
+                    <div class="card" style="max-width: 500px; margin: 0 auto;">
+                        <div class="card-body">
+                            <h2 class="text-center mb-4">Create Account</h2>
+                            
+                            <form class="ajax-form" action="php/auth.php" method="POST">
+                                <input type="hidden" name="action" value="register">
+                                
+                                <!-- Personal Information -->
+                                <div class="grid grid-2 mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" name="first_name" class="form-control" placeholder="John" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" name="last_name" class="form-control" placeholder="Doe" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- Account Information -->
+                                <div class="form-group">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" name="username" class="form-control" placeholder="johndoe" required>
+                                    <small class="form-text">Must be at least 3 characters long</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" name="email" class="form-control" placeholder="john@example.com" required>
+                                </div>
+                                
+                                <div class="grid grid-2 mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label">Password</label>
+                                        <div style="position: relative;">
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+                                            <button type="button" id="toggle-password" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <small class="form-text">Must be at least 6 characters</small>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Confirm Password</label>
+                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="••••••••" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- Contact Information -->
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number (Optional)</label>
+                                    <input type="tel" name="phone" class="form-control" placeholder="(555) 123-4567">
+                                </div>
+                                
+                                <!-- Address Information -->
+                                <h5 class="mb-3">Address Information (Optional)</h5>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Street Address</label>
+                                    <input type="text" name="address" class="form-control" placeholder="123 Main Street">
+                                </div>
+                                
+                                <div class="grid grid-3 mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label">City</label>
+                                        <input type="text" name="city" class="form-control" placeholder="New York">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">State</label>
+                                        <input type="text" name="state" class="form-control" placeholder="NY">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">ZIP Code</label>
+                                        <input type="text" name="zip_code" class="form-control" placeholder="10001">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <select name="country" class="form-control">
+                                        <option value="">Select Country</option>
+                                        <option value="US">United States</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="FR">France</option>
+                                        <option value="JP">Japan</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Terms and Conditions -->
+                                <div class="form-group">
+                                    <label class="d-flex align-center gap-2">
+                                        <input type="checkbox" name="terms" required>
+                                        <span>I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="d-flex align-center gap-2">
+                                        <input type="checkbox" name="newsletter">
+                                        <span>Subscribe to our newsletter for exclusive offers and updates</span>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-full mb-3">Create Account</button>
+                                
+                                <div class="text-center">
+                                    <p>Already have an account? <a href="login.html" style="color: var(--primary-color); text-decoration: none;">Sign in here</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--dark-color); color: white; padding: 2rem 0;">
+        <div class="container text-center">
+            <p>&copy; 2024 ModernStore. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Toggle password visibility
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Password confirmation validation
+        document.getElementById('confirm_password').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (password !== confirmPassword && confirmPassword.length > 0) {
+                this.classList.add('error');
+                
+                // Remove existing error message
+                const existingError = this.parentNode.querySelector('.form-error');
+                if (existingError) existingError.remove();
+                
+                // Add error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'form-error';
+                errorDiv.textContent = 'Passwords do not match';
+                this.parentNode.appendChild(errorDiv);
+            } else {
+                this.classList.remove('error');
+                const existingError = this.parentNode.querySelector('.form-error');
+                if (existingError) existingError.remove();
+            }
+        });
+
+        // Username validation
+        document.querySelector('input[name="username"]').addEventListener('input', function() {
+            const username = this.value;
+            
+            if (username.length > 0 && username.length < 3) {
+                this.classList.add('error');
+                
+                // Remove existing error message
+                const existingError = this.parentNode.querySelector('.form-error');
+                if (existingError) existingError.remove();
+                
+                // Add error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'form-error';
+                errorDiv.textContent = 'Username must be at least 3 characters';
+                this.parentNode.appendChild(errorDiv);
+            } else {
+                this.classList.remove('error');
+                const existingError = this.parentNode.querySelector('.form-error');
+                if (existingError) existingError.remove();
+            }
+        });
+
+        // Password strength indicator
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            
+            // Remove existing strength indicator
+            const existingIndicator = this.parentNode.parentNode.querySelector('.password-strength');
+            if (existingIndicator) existingIndicator.remove();
+            
+            if (password.length > 0) {
+                const strengthDiv = document.createElement('div');
+                strengthDiv.className = 'password-strength';
+                strengthDiv.innerHTML = `
+                    <div style="display: flex; gap: 2px; margin-top: 5px;">
+                        <div style="height: 4px; flex: 1; background: ${strength >= 1 ? (strength >= 3 ? '#10b981' : '#f59e0b') : '#e5e7eb'}; border-radius: 2px;"></div>
+                        <div style="height: 4px; flex: 1; background: ${strength >= 2 ? (strength >= 3 ? '#10b981' : '#f59e0b') : '#e5e7eb'}; border-radius: 2px;"></div>
+                        <div style="height: 4px; flex: 1; background: ${strength >= 3 ? '#10b981' : '#e5e7eb'}; border-radius: 2px;"></div>
+                    </div>
+                    <small style="color: var(--text-light); font-size: 0.75rem;">
+                        ${strength === 1 ? 'Weak' : strength === 2 ? 'Medium' : strength === 3 ? 'Strong' : 'Too short'}
+                    </small>
+                `;
+                this.parentNode.parentNode.appendChild(strengthDiv);
+            }
+        });
+
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (/[A-Z]/.test(password) && /[a-z]/.test(password)) strength++;
+            if (/\d/.test(password) && /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) strength++;
+            return strength;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - ModernStore</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i> ModernStore
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    
+                    <div class="user-menu">
+                        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="section">
+        <div class="container">
+            <div class="d-flex justify-between align-center mb-4">
+                <h1><i class="fas fa-shopping-cart"></i> Shopping Cart</h1>
+                <a href="products.html" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </a>
+            </div>
+            
+            <div class="grid grid-3" style="gap: 3rem;">
+                <!-- Cart Items -->
+                <div style="grid-column: span 2;">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="cart-items-container">
+                                <!-- Cart items will be loaded here -->
+                            </div>
+                            
+                            <!-- Empty Cart Message -->
+                            <div id="empty-cart" class="text-center p-5 d-none">
+                                <i class="fas fa-shopping-cart" style="font-size: 4rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+                                <h3>Your cart is empty</h3>
+                                <p class="mb-4">Looks like you haven't added any items to your cart yet.</p>
+                                <a href="products.html" class="btn btn-primary">Start Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Order Summary</h4>
+                            
+                            <div class="d-flex justify-between mb-2">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            
+                            <div class="d-flex justify-between mb-2">
+                                <span>Shipping:</span>
+                                <span id="shipping">$0.00</span>
+                            </div>
+                            
+                            <div class="d-flex justify-between mb-2">
+                                <span>Tax:</span>
+                                <span id="tax">$0.00</span>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="d-flex justify-between mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                <span>Total:</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                            
+                            <!-- Coupon Code -->
+                            <div class="form-group">
+                                <label class="form-label">Coupon Code</label>
+                                <div class="d-flex gap-2">
+                                    <input type="text" id="coupon-code" class="form-control" placeholder="Enter coupon code">
+                                    <button class="btn btn-outline btn-sm" onclick="applyCoupon()">Apply</button>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary w-full mb-2" onclick="proceedToCheckout()">
+                                <i class="fas fa-lock"></i> Proceed to Checkout
+                            </button>
+                            
+                            <div class="text-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-shield-alt"></i> Secure checkout with SSL encryption
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Methods -->
+                    <div class="card mt-3">
+                        <div class="card-body text-center">
+                            <h6 class="mb-3">We Accept</h6>
+                            <div class="d-flex justify-center gap-2">
+                                <i class="fab fa-cc-visa" style="font-size: 2rem; color: #1a1f71;"></i>
+                                <i class="fab fa-cc-mastercard" style="font-size: 2rem; color: #eb001b;"></i>
+                                <i class="fab fa-cc-amex" style="font-size: 2rem; color: #006fcf;"></i>
+                                <i class="fab fa-paypal" style="font-size: 2rem; color: #003087;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recently Viewed Products -->
+    <section class="section" style="background: var(--light-color);">
+        <div class="container">
+            <h3 class="mb-4">You might also like</h3>
+            <div class="grid grid-4" id="recommended-products">
+                <!-- Recommended products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--dark-color); color: white; padding: 3rem 0 1rem;">
+        <div class="container">
+            <div class="grid grid-4 mb-4">
+                <div>
+                    <h4 class="mb-3">ModernStore</h4>
+                    <p>Your premier destination for quality products at unbeatable prices.</p>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><a href="products.html" style="color: #ccc; text-decoration: none;">All Products</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Best Sellers</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Sale Items</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Customer Service</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">FAQ</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Contact Info</h5>
+                    <p style="color: #ccc;"><i class="fas fa-envelope"></i> info@modernstore.com</p>
+                    <p style="color: #ccc;"><i class="fas fa-phone"></i> (555) 123-4567</p>
+                </div>
+            </div>
+            
+            <hr style="border-color: #555;">
+            <div class="text-center mt-3">
+                <p style="color: #ccc; margin: 0;">&copy; 2024 ModernStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCartItems();
+            loadRecommendedProducts();
+            updateCartSummary();
+        });
+
+        function loadCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const emptyCart = document.getElementById('empty-cart');
+            
+            // Get cart from localStorage (or server if user is logged in)
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '';
+                emptyCart.classList.remove('d-none');
+                return;
+            }
+            
+            emptyCart.classList.add('d-none');
+            
+            const cartHTML = cart.map(item => `
+                <div class="cart-item" data-product-id="${item.id}">
+                    <img src="uploads/${item.image}" alt="${item.name}" class="cart-item-image">
+                    
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        
+                        <div class="quantity-control mt-2">
+                            <button class="quantity-btn" onclick="updateItemQuantity('${item.id}', ${item.quantity - 1})">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" value="${item.quantity}" min="1" max="99" 
+                                   class="quantity-input" 
+                                   onchange="updateItemQuantity('${item.id}', parseInt(this.value))">
+                            <button class="quantity-btn" onclick="updateItemQuantity('${item.id}', ${item.quantity + 1})">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-item-actions">
+                        <div class="cart-item-total mb-2" style="font-weight: 600;">
+                            ${formatPrice(item.price * item.quantity)}
+                        </div>
+                        
+                        <button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.id}')">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                        
+                        <button class="btn btn-outline btn-sm mt-1" onclick="moveToWishlist('${item.id}')">
+                            <i class="fas fa-heart"></i> Move to Wishlist
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            cartItemsContainer.innerHTML = cartHTML;
+            updateCartSummary();
+        }
+
+        function updateItemQuantity(productId, newQuantity) {
+            if (newQuantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity = newQuantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Update the specific item display
+                const itemElement = document.querySelector(`[data-product-id="${productId}"]`);
+                const quantityInput = itemElement.querySelector('.quantity-input');
+                const totalElement = itemElement.querySelector('.cart-item-total');
+                
+                quantityInput.value = newQuantity;
+                totalElement.textContent = formatPrice(cart[itemIndex].price * newQuantity);
+                
+                updateCartSummary();
+                app.updateCartCount();
+                
+                app.showNotification('Cart updated successfully', 'success');
+            }
+        }
+
+        function removeFromCart(productId) {
+            if (confirm('Are you sure you want to remove this item from your cart?')) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart = cart.filter(item => item.id !== productId);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                loadCartItems();
+                app.updateCartCount();
+                app.showNotification('Item removed from cart', 'info');
+            }
+        }
+
+        function moveToWishlist(productId) {
+            // Find item in cart
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(item => item.id === productId);
+            
+            if (item) {
+                // Add to wishlist
+                let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+                const existingIndex = wishlist.findIndex(wishItem => wishItem.id === productId);
+                
+                if (existingIndex === -1) {
+                    wishlist.push({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        image: item.image
+                    });
+                    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                }
+                
+                // Remove from cart
+                removeFromCart(productId);
+                app.showNotification('Item moved to wishlist', 'success');
+            }
+        }
+
+        function updateCartSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 50 ? 0 : 9.99; // Free shipping over $50
+            const tax = subtotal * 0.08; // 8% tax
+            const total = subtotal + shipping + tax;
+            
+            document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('shipping').textContent = formatPrice(shipping);
+            document.getElementById('tax').textContent = formatPrice(tax);
+            document.getElementById('total').textContent = formatPrice(total);
+        }
+
+        function applyCoupon() {
+            const couponCode = document.getElementById('coupon-code').value.trim();
+            
+            if (!couponCode) {
+                app.showNotification('Please enter a coupon code', 'warning');
+                return;
+            }
+            
+            // Simulate coupon validation
+            const validCoupons = {
+                'SAVE10': 0.10,
+                'WELCOME20': 0.20,
+                'FREESHIP': 'free_shipping'
+            };
+            
+            if (validCoupons[couponCode.toUpperCase()]) {
+                app.showNotification('Coupon applied successfully!', 'success');
+                // Apply coupon logic here
+                updateCartSummary();
+            } else {
+                app.showNotification('Invalid coupon code', 'error');
+            }
+        }
+
+        function proceedToCheckout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                app.showNotification('Your cart is empty', 'warning');
+                return;
+            }
+            
+            // Check if user is logged in (you'd implement this based on your auth system)
+            const isLoggedIn = false; // Replace with actual check
+            
+            if (!isLoggedIn) {
+                if (confirm('You need to login to proceed to checkout. Would you like to login now?')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            
+            window.location.href = 'checkout.html';
+        }
+
+        async function loadRecommendedProducts() {
+            try {
+                const response = await fetch('php/get-products.php?featured=1&limit=4');
+                const products = await response.json();
+                
+                const recommendedContainer = document.getElementById('recommended-products');
+                recommendedContainer.innerHTML = products.map(product => {
+                    const currentPrice = product.sale_price || product.price;
+                    
+                    return `
+                        <div class="card product-card">
+                            <img src="uploads/${product.image}" alt="${product.name}" class="card-img">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <div class="price mb-3">${formatPrice(currentPrice)}</div>
+                                <button class="btn btn-primary w-full add-to-cart"
+                                        data-product-id="${product.id}"
+                                        data-product-name="${product.name}"
+                                        data-product-price="${currentPrice}"
+                                        data-product-image="${product.image}">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading recommended products:', error);
+            }
+        }
+
+        function formatPrice(price) {
+            return '$' + parseFloat(price).toFixed(2);
+        }
+    </script>
+</body>
+</html>
