@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernStore - Your Premier E-commerce Destination</title>
+    <meta name="description" content="Discover the latest products at ModernStore. Electronics, clothing, books, and more with fast shipping and great prices.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ModernStore - Premier E-commerce">
+    <meta property="og:description" content="Discover amazing products with fast shipping">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://modernstore.com">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i> ModernStore
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search products..." class="form-control" style="width: 200px;">
+                        <div id="search-results" class="search-results d-none"></div>
+                    </div>
+                    
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    
+                    <div class="user-menu">
+                        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+                    </div>
+                    
+                    <button class="menu-toggle d-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to ModernStore</h1>
+            <p>Discover amazing products with unbeatable prices and fast shipping worldwide</p>
+            <a href="products.html" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="section" id="categories">
+        <div class="container">
+            <h2 class="text-center mb-5">Shop by Category</h2>
+            <div class="grid grid-4" id="categories-grid">
+                <!-- Categories will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section" style="background: var(--light-color);">
+        <div class="container">
+            <div class="d-flex justify-between align-center mb-4">
+                <h2>Featured Products</h2>
+                <a href="products.html" class="btn btn-outline">View All</a>
+            </div>
+            
+            <!-- Product Filters -->
+            <div class="filter-buttons mb-4 text-center">
+                <button class="btn btn-outline btn-sm filter-btn active" data-category="all">All</button>
+                <button class="btn btn-outline btn-sm filter-btn" data-category="1">Electronics</button>
+                <button class="btn btn-outline btn-sm filter-btn" data-category="2">Clothing</button>
+                <button class="btn btn-outline btn-sm filter-btn" data-category="3">Books</button>
+                <button class="btn btn-outline btn-sm filter-btn" data-category="4">Home & Garden</button>
+            </div>
+            
+            <div class="grid grid-4" id="featured-products">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Choose ModernStore?</h2>
+            <div class="grid grid-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-shipping-fast" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                        <h4 class="card-title">Fast Shipping</h4>
+                        <p class="card-text">Free shipping on orders over $50. Get your products delivered within 2-3 business days.</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-shield-alt" style="font-size: 3rem; color: var(--success-color); margin-bottom: 1rem;"></i>
+                        <h4 class="card-title">Secure Shopping</h4>
+                        <p class="card-text">Your data is protected with industry-standard encryption and secure payment processing.</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-undo" style="font-size: 3rem; color: var(--warning-color); margin-bottom: 1rem;"></i>
+                        <h4 class="card-title">Easy Returns</h4>
+                        <p class="card-text">Not satisfied? Return your purchase within 30 days for a full refund, no questions asked.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section" style="background: var(--primary-color); color: white;">
+        <div class="container text-center">
+            <h2>Stay Updated</h2>
+            <p class="mb-4">Subscribe to our newsletter and get 10% off your first order!</p>
+            <form class="newsletter-form ajax-form" action="php/newsletter.php" method="POST" style="max-width: 500px; margin: 0 auto;">
+                <div class="d-flex gap-2">
+                    <input type="email" name="email" placeholder="Enter your email" class="form-control" required>
+                    <button type="submit" class="btn btn-secondary">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--dark-color); color: white; padding: 3rem 0 1rem;">
+        <div class="container">
+            <div class="grid grid-4 mb-4">
+                <div>
+                    <h4 class="mb-3">ModernStore</h4>
+                    <p>Your premier destination for quality products at unbeatable prices.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><a href="products.html" style="color: #ccc; text-decoration: none;">All Products</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">New Arrivals</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Best Sellers</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Sale Items</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Customer Service</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Contact Us</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">FAQ</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Shipping Info</a></li>
+                        <li class="mb-2"><a href="#" style="color: #ccc; text-decoration: none;">Returns</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="mb-3">Contact Info</h5>
+                    <p style="color: #ccc;"><i class="fas fa-map-marker-alt"></i> 123 Store Street, City, State 12345</p>
+                    <p style="color: #ccc;"><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p style="color: #ccc;"><i class="fas fa-envelope"></i> info@modernstore.com</p>
+                </div>
+            </div>
+            
+            <hr style="border-color: #555; margin: 2rem 0 1rem;">
+            <div class="d-flex justify-between align-center">
+                <p style="color: #ccc; margin: 0;">&copy; 2024 ModernStore. All rights reserved.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" style="color: #ccc; text-decoration: none;">Privacy Policy</a>
+                    <a href="#" style="color: #ccc; text-decoration: none;">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Load categories and products on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadCategories();
+            await loadFeaturedProducts();
+        });
+
+        async function loadCategories() {
+            try {
+                const response = await fetch('php/get-categories.php');
+                const categories = await response.json();
+                
+                const categoriesGrid = document.getElementById('categories-grid');
+                categoriesGrid.innerHTML = categories.map(category => `
+                    <div class="card">
+                        <img src="uploads/${category.image}" alt="${category.name}" class="card-img">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">${category.name}</h4>
+                            <p class="card-text">${category.description}</p>
+                            <a href="products.html?category=${category.id}" class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading categories:', error);
+            }
+        }
+
+        async function loadFeaturedProducts() {
+            try {
+                const response = await fetch('php/get-products.php?featured=1&limit=8');
+                const products = await response.json();
+                
+                const productsGrid = document.getElementById('featured-products');
+                productsGrid.innerHTML = products.map(product => {
+                    const features = JSON.parse(product.features || '[]');
+                    const currentPrice = product.sale_price || product.price;
+                    
+                    return `
+                        <div class="card product-card" data-category="${product.category_id}" data-price="${currentPrice}">
+                            ${product.sale_price ? '<div class="product-badge">Sale</div>' : ''}
+                            
+                            <div class="product-actions">
+                                <button class="product-action quick-view" data-product-id="${product.id}" title="Quick View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="product-action wishlist-btn" 
+                                        data-product-id="${product.id}"
+                                        data-product-name="${product.name}"
+                                        data-product-price="${currentPrice}"
+                                        data-product-image="${product.image}"
+                                        title="Add to Wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            
+                            <img src="uploads/${product.image}" alt="${product.name}" class="card-img">
+                            
+                            <div class="card-body">
+                                <h4 class="card-title">${product.name}</h4>
+                                <p class="card-text">${product.description.substring(0, 100)}...</p>
+                                
+                                <div class="price mb-3">
+                                    ${product.sale_price ? 
+                                        `<span class="price-old">$${product.price}</span>$${product.sale_price}` : 
+                                        `$${product.price}`
+                                    }
+                                </div>
+                                
+                                <button class="btn btn-primary w-full add-to-cart"
+                                        data-product-id="${product.id}"
+                                        data-product-name="${product.name}"
+                                        data-product-price="${currentPrice}"
+                                        data-product-image="${product.image}">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+    </script>
+</body>
+</html>
